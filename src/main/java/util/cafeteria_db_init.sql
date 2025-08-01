@@ -12,6 +12,7 @@ INSERT INTO Produit (nom, categorie, prix, description, image) VALUES
 ('Sandwich Jambon-Fromage', 'Plat', 5.90, 'Pain frais, jambon, fromage fondu', 'sandwitch_jambon.jpg'),
 ('Salade César', 'Plat', 7.20, 'Poulet grillé, salade romaine, croûtons', 'salade_cesar.jpg'),
 ('Thé Vert', 'Boisson', 2.00, 'Thé vert bio infusé', 'the_vert.jpg');
+('Chocolat Glacé', 'Dessert', 2.15, 'Chocolat bien Glacé, framboise', 'chocolat_glace.jpg');
 
 
 -- Quelques messages envoyés par des utilisateurs
