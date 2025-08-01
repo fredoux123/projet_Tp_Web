@@ -140,19 +140,6 @@
 
         <jsp:include page="includes/footer.jsp" />
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const alerts = ["successMessage", "errorMessage", "warningMessage"];
-                alerts.forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) {
-                        setTimeout(() => {
-                            const alert = bootstrap.Alert.getOrCreateInstance(el);
-                            alert.close();
-                        }, 2000);
-                    }
-                });
-            });
-        </script>
+        <script src="js/contact.js"></script>
     </body>
 </html>

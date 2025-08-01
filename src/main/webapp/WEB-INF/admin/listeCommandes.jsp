@@ -8,48 +8,31 @@
 %>
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title><%= bundle.getString("orders.title") %></title>
-    <link rel="stylesheet" href="css/styleMenu.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body class="d-flex flex-column min-vh-100">
-    <jsp:include page="/includes/navbar.jsp" />
+    <head>
+        <meta charset="UTF-8">
+        <title><%= bundle.getString("orders.title")%></title>
+        <link rel="stylesheet" href="css/styleMenu.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body class="d-flex flex-column min-vh-100">
+        <jsp:include page="/includes/navbar.jsp" />
 
-    <div class="container mt-4">
-        <h2 class="mb-4">📦 <%= bundle.getString("orders.title") %></h2>
+        <div class="container mt-4">
+            <h2 class="mb-4">📦 <%= bundle.getString("orders.title")%></h2>
 
-        <!--  Recherche en direct via keyup -->
-        <input type="number" id="searchId" class="form-control mb-4"
-               placeholder="<%= bundle.getString("orders.search.placeholder") %>" />
+            <!--  Recherche en direct via keyup -->
+            <input type="number" id="searchId" class="form-control mb-4"
+                   placeholder="<%= bundle.getString("orders.search.placeholder")%>" />
 
-        <!-- Conteneur où sera injecté le tableau -->
-        <div id="table-container">
-            <div class="alert alert-info">⏳ Chargement des commandes...</div>
+            <!-- Conteneur où sera injecté le tableau -->
+            <div id="table-container">
+                <div class="alert alert-info">⏳ Chargement des commandes...</div>
+            </div>
         </div>
-    </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <script src="<%= request.getContextPath()%>/js/commandes.js"></script>
 
-    <script>
-    function loadCommandes(searchId = "") {
-        fetch("rechercheCommande?searchId=" + encodeURIComponent(searchId))
-          .then(resp => resp.text())
-          .then(html => document.getElementById("table-container").innerHTML = html)
-          .catch(err => {
-            document.getElementById("table-container").innerHTML =
-              "<div class='alert alert-danger'>Erreur lors du chargement des commandes.</div>";
-            console.error(err);
-          });
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const input = document.getElementById("searchId");
-        input.addEventListener("keyup", () => loadCommandes(input.value.trim()));
-        loadCommandes();
-    });
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-    <jsp:include page="/includes/footer.jsp" />
-</body>
+        <jsp:include page="/includes/footer.jsp" />
+    </body>
 </html>

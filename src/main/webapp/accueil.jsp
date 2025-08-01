@@ -88,45 +88,15 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-        <% if (Boolean.TRUE.equals(loginModal) && erreur != null) {%>
         <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const modal = new bootstrap.Modal(document.getElementById('loginModal'));
-                modal.show();
-                const body = document.querySelector("#loginModal .modal-body");
-                const div = document.createElement("div");
-                div.className = "alert alert-danger";
-                div.innerText = "<%= bundle.getString(erreur)%>";
-                body.prepend(div);
-            });
-        </script>
-        <% } %>
+            const showLoginModal = <%= Boolean.TRUE.equals(loginModal)%>;
+            const loginErrorMessage = <%= erreur != null ? "\"" + bundle.getString(erreur).replace("\"", "\\\"") + "\"" : "null"%>;
 
-        <% if (Boolean.TRUE.equals(registerModal) && registerErreur != null) {%>
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const modal = new bootstrap.Modal(document.getElementById('registerModal'));
-                modal.show();
-                const body = document.querySelector("#registerModal .modal-body");
-                const div = document.createElement("div");
-                div.className = "alert alert-danger";
-                div.innerText = "<%= bundle.getString(registerErreur)%>";
-                body.prepend(div);
-            });
+            const showRegisterModal = <%= Boolean.TRUE.equals(registerModal)%>;
+            const registerErrorMessage = <%= registerErreur != null ? "\"" + bundle.getString(registerErreur).replace("\"", "\\\"") + "\"" : "null"%>;
         </script>
-        <% }%>
+        <script src="js/accueil.js"></script>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function () {
-                const alert = document.getElementById("successAlert");
-                if (alert) {
-                    setTimeout(() => {
-                        const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
-                        bsAlert.close();
-                    }, 2000);
-                }
-            });
-        </script>
 
     </body>
 </html>
