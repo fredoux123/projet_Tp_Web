@@ -6,7 +6,7 @@ public class Produit implements Serializable {
 
     private int id;
     private String nom;
-    private String categorie;
+    private String categorie; //Plat Boisson Dessert
     private double prix;
     private String description;
     private String image;

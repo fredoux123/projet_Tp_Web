@@ -18,12 +18,12 @@
             <% } %>
     </ul>
 </div>
-<% } %>
+<% }%>
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title><%= bundle.getString("produit.title.edit") %></title>
+        <title><%= bundle.getString("produit.title.edit")%></title>
         <link rel="stylesheet" href="css/styleMenu.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
               integrity="sha384-LN+7fdVzj6u52u30Kp6jO...5mcr" crossorigin="anonymous">
@@ -34,52 +34,65 @@
 
         <jsp:include page="/includes/navbar.jsp" />
         <div class="container mt-4">
-            <h3>✏️ <%= bundle.getString("produit.header.edit") %></h3>
+            <h3>✏️ <%= bundle.getString("produit.header.edit")%></h3>
 
             <%
                 Produit p = (Produit) request.getAttribute("produit");
                 if (p == null) {
             %>
-            <div class="alert alert-danger"><%= bundle.getString("produit.error.notfound") %></div>
+            <div class="alert alert-danger"><%= bundle.getString("produit.error.notfound")%></div>
             <%
-                } else {
+            } else {
             %>
             <form method="post" action="modifierProduit">
                 <input type="hidden" name="id" value="<%= p.getId()%>">
 
                 <div class="mb-3">
-                    <label><%= bundle.getString("produit.label.nom") %></label>
+                    <label><%= bundle.getString("produit.label.nom")%></label>
                     <input type="text" name="nom" class="form-control"
                            value="<%= request.getAttribute("nom") != null ? request.getAttribute("nom") : p.getNom()%>" required>
                 </div>
 
                 <div class="mb-3">
-                    <label><%= bundle.getString("produit.label.categorie") %></label>
-                    <input type="text" name="categorie" class="form-control"
-                           value="<%= request.getAttribute("categorie") != null ? request.getAttribute("categorie") : p.getCategorie()%>" required>
+                    <label><%= bundle.getString("produit.label.categorie")%></label>
+                    <select name="categorie" class="form-select" required>
+                        <%
+                            String selectedCat = (String) request.getAttribute("categorie");
+                            if (selectedCat == null) {
+                                selectedCat = p.getCategorie();
+                            }
+                            String[] categories = {"Plat", "Boisson", "Dessert"};
+                            for (String cat : categories) {
+                        %>
+                        <option value="<%= cat%>" <%= cat.equalsIgnoreCase(selectedCat) ? "selected" : ""%>><%= cat%></option>
+                        <%
+                            }
+                        %>
+                    </select>
                 </div>
 
+
                 <div class="mb-3">
-                    <label><%= bundle.getString("produit.label.prix") %> ($)</label>
+                    <label><%= bundle.getString("produit.label.prix")%> ($)</label>
                     <input type="number" step="0.01" name="prix" class="form-control"
                            value="<%= request.getAttribute("prix") != null ? request.getAttribute("prix") : p.getPrix()%>" required>
                 </div>
 
                 <div class="mb-3">
-                    <label><%= bundle.getString("produit.label.description") %></label>
+                    <label><%= bundle.getString("produit.label.description")%></label>
                     <textarea name="description" class="form-control"><%= request.getAttribute("description") != null ? request.getAttribute("description") : p.getDescription()%></textarea>
                 </div>
 
                 <div class="mb-3">
-                    <label><%= bundle.getString("produit.label.image") %> (<%= bundle.getString("produit.label.imageFile") %>)</label>
+                    <label><%= bundle.getString("produit.label.image")%> (<%= bundle.getString("produit.label.imageFile")%>)</label>
                     <input type="text" name="image" class="form-control"
                            value="<%= request.getAttribute("image") != null ? request.getAttribute("image") : p.getImage()%>">
                 </div>
 
-                <button type="submit" class="btn btn-primary"><%= bundle.getString("produit.button.edit") %></button>
-                <a href="menu" class="btn btn-secondary"><%= bundle.getString("produit.button.cancel") %></a>
+                <button type="submit" class="btn btn-primary"><%= bundle.getString("produit.button.edit")%></button>
+                <a href="menu" class="btn btn-secondary"><%= bundle.getString("produit.button.cancel")%></a>
             </form>
-            <% } %>
+            <% }%>
         </div>
         <jsp:include page="/includes/footer.jsp" />
     </body>
