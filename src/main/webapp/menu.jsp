@@ -101,16 +101,16 @@
                             <p class="fw-bold"><%= p.getPrix()%> $</p>
                         </div>
                         <div class="card-footer d-flex flex-wrap justify-content-center">
-                            <% if (utilisateur != null) {%>
+                            <% if (utilisateur != null && !"admin".equals(role)) {%>
                             <button type="button" class="btn btn-outline-success btn-sm commander-btn" data-id="<%= p.getId()%>">
                                 <%= bundle.getString("menu.button.order")%> 🛒
                             </button>
-                            <% } else {%>
+                            <% } else if (utilisateur == null) {%>
                             <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#connexionModal">
                                 <%= bundle.getString("menu.button.order")%> 🛒
                             </button>
                             <% } %>
-
+                            
                             <% if ("admin".equals(role)) {%>
                             <a href="editProduit?id=<%= p.getId()%>" class="btn btn-outline-warning btn-sm"><%= bundle.getString("menu.button.edit")%></a>
                             <form method="post" action="supprimerProduit" onsubmit="return confirm('<%= bundle.getString("menu.confirm.delete")%>');" class="d-inline">
