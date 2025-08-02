@@ -14,7 +14,7 @@ import java.sql.SQLException;
  */
 public class JdbcUtils {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/cafeteria_db";
+    private static final String URL = "jdbc:mysql://localhost:3306/cafe_db";
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
@@ -23,9 +23,9 @@ public class JdbcUtils {
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            System.out.println("✅ Driver MySQL chargé avec succès");
+            System.out.println("Driver MySQL chargé avec succès");
         } catch (ClassNotFoundException e) {
-            System.err.println("❌ Erreur de chargement du driver MySQL");
+            System.err.println("Erreur de chargement du driver MySQL");
             e.printStackTrace();
         }
     }

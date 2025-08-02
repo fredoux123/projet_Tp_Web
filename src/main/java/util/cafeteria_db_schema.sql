@@ -1,11 +1,11 @@
 -- Création de la base
-CREATE DATABASE IF NOT EXISTS cafeteria_db;
+CREATE DATABASE IF NOT EXISTS cafe_db;
 
-USE cafeteria_db;
+USE cafe_db;
 
 -- Création des tables
 -- Table Produit
-CREATE TABLE Produit (
+CREATE TABLE produit (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100),
     categorie VARCHAR(50),
@@ -15,7 +15,7 @@ CREATE TABLE Produit (
 );
 
 -- Table Contact
-CREATE TABLE Contact (
+CREATE TABLE contact (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100),
     email VARCHAR(100),
@@ -34,7 +34,7 @@ CREATE TABLE utilisateur (
 );
 
 -- Table commandes
-CREATE TABLE commandes (
+CREATE TABLE commande (
     id INT AUTO_INCREMENT PRIMARY KEY,
     date_commande DATETIME NOT NULL,
     utilisateur_id INT NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE details_commande (
     produit_id INT NOT NULL,
     quantite INT NOT NULL,
     prix_unitaire DOUBLE NOT NULL,
-    FOREIGN KEY (commande_id) REFERENCES commandes(id),
+    FOREIGN KEY (commande_id) REFERENCES commande(id),
     FOREIGN KEY (produit_id) REFERENCES produit(id)
 );
 

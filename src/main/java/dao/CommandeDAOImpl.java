@@ -12,7 +12,7 @@ public class CommandeDAOImpl implements CommandeDAO {
 
     @Override
     public void sauvegarderCommande(Commande commande) {
-        String insertCommande = "INSERT INTO commandes (date_commande, utilisateur_id) VALUES (?, ?)";
+        String insertCommande = "INSERT INTO commande (date_commande, utilisateur_id) VALUES (?, ?)";
         String insertDetail = "INSERT INTO details_commande (commande_id, produit_id, quantite, prix_unitaire) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = JdbcUtils.getInstance().getConnection()) {
@@ -49,7 +49,7 @@ public class CommandeDAOImpl implements CommandeDAO {
         String sql = "SELECT c.id, c.date_commande, c.utilisateur_id, "
                 + "u.nom, u.email, "
                 + "SUM(dc.quantite * dc.prix_unitaire) AS montant_total "
-                + "FROM commandes c "
+                + "FROM commande c "
                 + "JOIN utilisateur u ON c.utilisateur_id = u.id "
                 + "JOIN details_commande dc ON c.id = dc.commande_id "
                 + "GROUP BY c.id, c.date_commande, c.utilisateur_id, u.nom, u.email";
@@ -79,7 +79,7 @@ public class CommandeDAOImpl implements CommandeDAO {
     public Commande findById(int id) {
         String sql = "SELECT c.id, c.date_commande, c.utilisateur_id, u.nom, u.email, "
                 + "SUM(dc.quantite * dc.prix_unitaire) AS montant_total "
-                + "FROM commandes c "
+                + "FROM commande c "
                 + "JOIN utilisateur u ON c.utilisateur_id = u.id "
                 + "JOIN details_commande dc ON c.id = dc.commande_id "
                 + "WHERE c.id = ? "

@@ -7,23 +7,23 @@ INSERT INTO utilisateur (nom, email, mot_de_passe, role) VALUES
 
 
 -- Données initiales pour produit
-INSERT INTO Produit (nom, categorie, prix, description, image) VALUES
+INSERT INTO produit (nom, categorie, prix, description, image) VALUES
 ('Café Espresso', 'Boisson', 2.50, 'Un café court et intense', 'cafe_espresso.jpg'),
 ('Sandwich Jambon-Fromage', 'Plat', 5.90, 'Pain frais, jambon, fromage fondu', 'sandwitch_jambon.jpg'),
 ('Salade César', 'Plat', 7.20, 'Poulet grillé, salade romaine, croûtons', 'salade_cesar.jpg'),
-('Thé Vert', 'Boisson', 2.00, 'Thé vert bio infusé', 'the_vert.jpg');
+('Thé Vert', 'Boisson', 2.00, 'Thé vert bio infusé', 'the_vert.jpg'),
 ('Chocolat Glacé', 'Dessert', 2.15, 'Chocolat bien Glacé, framboise', 'chocolat_glace.jpg');
 
 
 -- Quelques messages envoyés par des utilisateurs
-INSERT INTO Contact (nom, email, message, lu) VALUES
+INSERT INTO contact (nom, email, message, lu) VALUES
 ('Alice Dupont', 'alice@example.com', 'Bonjour, vos horaires sont-ils toujours à jour ?', FALSE),
 ('Marc Lemoine', 'marc@example.com', 'Puis-je réserver pour un groupe ?', TRUE),
 ('Sophie Martin', 'sophie@example.com', 'Votre café est excellent ! Merci 😊', TRUE);
 
 
 -- Commandes passées par les utilisateurs
-INSERT INTO commandes (date_commande, utilisateur_id) VALUES
+INSERT INTO commande (date_commande, utilisateur_id) VALUES
 (NOW() - INTERVAL 2 DAY, 1),
 (NOW() - INTERVAL 1 DAY, 2);
 
