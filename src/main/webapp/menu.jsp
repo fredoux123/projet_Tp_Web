@@ -100,30 +100,39 @@
                             <p class="card-text"><%= p.getDescription()%></p>
                             <p class="fw-bold"><%= p.getPrix()%> $</p>
                         </div>
-                        <div class="card-footer d-flex flex-wrap justify-content-center">
-                            <% if (utilisateur != null && !"admin".equals(role)) { %>
-    <button type="button" class="btn btn-outline-success btn-sm commander-btn" data-id="<%= p.getId()%>">
-        <%= bundle.getString("menu.button.order")%> 🛒
-    </button>
-<% } else if (utilisateur == null) { %>
-    <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#connexionModal">
-        <%= bundle.getString("menu.button.order")%> 🛒
-    </button>
-<% } else if ("admin".equals(role)) { %>
+<div class="card-footer d-flex flex-wrap justify-content-center">
+
+    <%-- Bouton Commander (clients uniquement) --%>
+    <% if (utilisateur != null && !"admin".equals(role)) { %>
+        <button type="button" class="btn btn-outline-success btn-sm commander-btn" data-id="<%= p.getId()%>">
+            <%= bundle.getString("menu.button.order")%> 🛒
+        </button>
+    <% } else if (utilisateur == null) { %>
+        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#connexionModal">
+            <%= bundle.getString("menu.button.order")%> 🛒
+        </button>
+    <% } %>
+
+    <%-- Bouton Détails (accessible à tous) --%>
     <a href="detailsProduit?id=<%= p.getId()%>" class="btn btn-outline-primary btn-sm">
         <%= bundle.getString("menu.button.details")%> 🔍
     </a>
-<% } %>
 
-                            
-                            <% if ("admin".equals(role)) {%>
-                            <a href="editProduit?id=<%= p.getId()%>" class="btn btn-outline-warning btn-sm"><%= bundle.getString("menu.button.edit")%></a>
-                            <form method="post" action="supprimerProduit" onsubmit="return confirm('<%= bundle.getString("menu.confirm.delete")%>');" class="d-inline">
-                                <input type="hidden" name="id" value="<%= p.getId()%>">
-                                <button type="submit" class="btn btn-outline-danger btn-sm"><%= bundle.getString("menu.button.delete")%></button>
-                            </form>
-                            <% } %>
-                        </div>
+    <%-- Actions Admin : Modifier / Supprimer --%>
+    <% if ("admin".equals(role)) { %>
+        <a href="editProduit?id=<%= p.getId()%>" class="btn btn-outline-warning btn-sm">
+            <%= bundle.getString("menu.button.edit")%>
+        </a>
+        <form method="post" action="supprimerProduit" onsubmit="return confirm('<%= bundle.getString("menu.confirm.delete")%>');" class="d-inline">
+            <input type="hidden" name="id" value="<%= p.getId()%>">
+            <button type="submit" class="btn btn-outline-danger btn-sm">
+                <%= bundle.getString("menu.button.delete")%>
+            </button>
+        </form>
+    <% } %>
+
+</div>
+
                     </div>
                 </div>
                 <% } %>

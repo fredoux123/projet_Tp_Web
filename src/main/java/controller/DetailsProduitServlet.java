@@ -23,15 +23,6 @@ public class DetailsProduitServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        // Vérification du rôle admin
-        HttpSession session = req.getSession(false);
-        String role = (session != null) ? (String) session.getAttribute("role") : null;
-
-        if (role == null || !"admin".equals(role)) {
-            resp.sendRedirect("login.jsp");
-            return;
-        }
-
         String idParam = req.getParameter("id");
 
         if (idParam == null) {
@@ -50,7 +41,7 @@ public class DetailsProduitServlet extends HttpServlet {
                 req.setAttribute("produit", produit);
             }
 
-            req.getRequestDispatcher("/WEB-INF/admin/detailsProduit.jsp").forward(req, resp);
+            req.getRequestDispatcher("detailsProduit.jsp").forward(req, resp);
 
         } catch (NumberFormatException e) {
             resp.sendRedirect("menu");
