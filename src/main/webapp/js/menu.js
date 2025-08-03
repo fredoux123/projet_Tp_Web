@@ -18,7 +18,7 @@
       });
     }
 
-    // ✅ Auto-fermeture du message succès
+    //  Auto-fermeture du message succès
     const successMessage = document.getElementById("successMessage");
     if (successMessage) {
       setTimeout(() => {

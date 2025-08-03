@@ -21,36 +21,38 @@ public class ServletPanier extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+   protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
 
-        int id = Integer.parseInt(request.getParameter("id"));
-        Produit nouveauProduit = produitDAO.findById(id);
-
-        HttpSession session = request.getSession();
-        List<Produit> panier = (List<Produit>) session.getAttribute("panier");
-
-        if (panier == null) {
-            panier = new ArrayList<>();
+    int id = Integer.parseInt(request.getParameter("id"));
+    Produit produit = produitDAO.findById(id);
+    // Ajout au panier (inchangée)
+    HttpSession session = request.getSession();
+    List<Produit> panier = (List<Produit>) session.getAttribute("panier");
+    if (panier == null) {
+        panier = new ArrayList<>();
+    }
+    boolean found = false;
+    for (Produit p : panier) {
+        if (p.getId() == produit.getId()) {
+            p.setQuantite(p.getQuantite() + 1);
+            found = true;
+            break;
         }
+    }
+    if (!found) {
+        produit.setQuantite(1);
+        panier.add(produit);
+    }
+    session.setAttribute("panier", panier);
 
-        boolean existeDeja = false;
-
-        for (Produit p : panier) {
-            if (p.getId() == nouveauProduit.getId()) {
-                p.setQuantite(p.getQuantite() + 1); //  Incrémente la quantité
-                existeDeja = true;
-                break;
-            }
-        }
-
-        if (!existeDeja) {
-            nouveauProduit.setQuantite(1); //  1ère fois qu'on l'ajoute
-            panier.add(nouveauProduit);
-        }
-
-        session.setAttribute("panier", panier);
+    // Redirection intelligente
+    String goBack = request.getParameter("goBack");
+    if ("details".equals(goBack)) {
+        response.sendRedirect("detailsProduit?id=" + id);
+    } else {
         response.sendRedirect("menu");
     }
+}
 
 }

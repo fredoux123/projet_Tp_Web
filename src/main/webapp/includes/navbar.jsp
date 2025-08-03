@@ -37,7 +37,7 @@
     if ("admin".equals(role)) {
 %>
     <li class="nav-item">
-        <a class="nav-link" href="commandes">📋 Commandes</a>
+        <a class="nav-link" href="commandes">📋 <%= bundle.getString("navbar.orders") %></a>
     </li>
 <% } %>
 
