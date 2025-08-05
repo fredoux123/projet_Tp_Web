@@ -142,7 +142,9 @@
         <!-- 💳 Modal de paiement -->
         <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
             <div class="modal-dialog">
-                <form id="paymentForm" class="modal-content needs-validation" novalidate method="post" action="validerPaiement">
+                <form id="paymentForm" class="modal-content needs-validation" novalidate method="post" action="validerPaiement"
+                      data-expired-msg="<%= bundle.getString("payment.invalid.expired")%>">
+
                     <div class="modal-header">
                         <h5 class="modal-title" id="paymentModalLabel"><%= bundle.getString("payment.title")%></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -153,6 +155,7 @@
                         <div class="mb-3">
                             <label class="form-label"><%= bundle.getString("payment.name")%></label>
                             <input type="text" class="form-control" required>
+                            <div class="invalid-feedback"><%= bundle.getString("payment.invalid.name")%></div>
                         </div>
                         <!-- Numéro de carte -->
                         <div class="mb-3">
@@ -169,9 +172,12 @@
                                 <input type="text" class="form-control" name="expDate"
                                        placeholder="MM/YY"
                                        pattern="(?:0[1-9]|1[0-2])/[0-9]{2}"
-                                       maxlength="5" required>
+                                       maxlength="5" required
+                                       data-expired-msg="<%= bundle.getString("payment.invalid.expired")%>"
+                                       data-format-msg="<%= bundle.getString("payment.invalid.expiry_format")%>">
                                 <div class="invalid-feedback"><%= bundle.getString("payment.invalid.expiry_format")%></div>
                             </div>
+
                             <div class="col-md-6 mb-3">
                                 <label class="form-label"><%= bundle.getString("payment.cvv")%></label>
                                 <input type="text" class="form-control" name="cvv"
